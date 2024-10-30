@@ -110,6 +110,35 @@ class CalculatorTest {
 
     }
 
+    @Test
+    @DisplayName("should delete one key and calc correctly")
+    void testDeleteandCalc(){
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(5);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(5);
+        calc.pressClearKey();
+        calc.pressDigitKey(3);
+
+        String expected = "8";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("should calculate inversion of 0")
+    void testCalcDiv0(){
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("1/x");
+
+        String expected = "Error";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
 
 
 }
