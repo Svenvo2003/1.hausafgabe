@@ -13,6 +13,7 @@ public class Calculator {
     private double latestValue;
 
     private String latestOperation = "";
+    private int count;
 
     /**
      * @return den aktuellen Bildschirminhalt als String
@@ -43,11 +44,19 @@ public class Calculator {
      * Wird daraufhin noch einmal die Taste gedrückt, dann werden auch zwischengespeicherte
      * Werte sowie der aktuelle Operationsmodus zurückgesetzt, so dass der Rechner wieder
      * im Ursprungszustand ist.
+     * count als Instanzvariablen definiert, die den Zustand und die aktuellen Werte des Rechners speichern
      */
     public void pressClearKey() {
-        screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+        count=count+1;
+        if(count == 1){
+            screen = "0";
+        }
+        else {
+            screen = "0";
+            latestOperation = "";
+            latestValue = 0.0;
+            count = 0;
+        }
     }
 
     /**
@@ -82,6 +91,7 @@ public class Calculator {
         };
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
+        if(screen.equals("Infinity")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
 
     }
